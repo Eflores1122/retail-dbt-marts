@@ -1,0 +1,22 @@
+# Copy this file over profiles.yml only when running against BigQuery.
+# CI and the default DuckDB path do not read it.
+# Install the adapter separately: pip install "dbt-bigquery>=1.11,<2"
+#
+#   export MERCADOALBA_BQ_PROJECT=your-project
+#   export MERCADOALBA_BQ_DATASET=mercadoalba
+#   export MERCADOALBA_BQ_LOCATION=US
+#   export DBT_PROFILES_DIR=.
+#   dbt build --target bigquery
+
+mercadoalba:
+  target: bigquery
+  outputs:
+    bigquery:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('MERCADOALBA_BQ_PROJECT') }}"
+      dataset: "{{ env_var('MERCADOALBA_BQ_DATASET', 'mercadoalba') }}"
+      location: "{{ env_var('MERCADOALBA_BQ_LOCATION', 'US') }}"
+      threads: 4
+      job_execution_timeout_seconds: 300
+      priority: interactive

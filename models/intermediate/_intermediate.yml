@@ -1,0 +1,259 @@
+version: 2
+
+models:
+  - name: int_order_lines
+    description: >
+      Signed order lines. Sales have positive quantity and amount.
+      Returns have negative quantity and amount. Cancelled orders stay in the rowset.
+    columns:
+      - name: order_line_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_stores')
+                field: store_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+      - name: order_date
+        data_tests: [not_null]
+      - name: ordered_at_utc
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["completed", "cancelled"]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["online", "physical"]
+      - name: line_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["sale", "return"]
+      - name: signed_quantity
+        data_tests: [not_null]
+      - name: unit_price_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: unit_cost_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: line_amount_centavos
+        data_tests: [not_null]
+      - name: line_cost_centavos
+        data_tests: [not_null]
+      - name: margin_centavos
+        data_tests: [not_null]
+      - name: category
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "line_amount_centavos = signed_quantity * unit_price_centavos"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "margin_centavos = line_amount_centavos - line_cost_centavos"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(line_type = 'sale' and signed_quantity > 0) or (line_type = 'return' and signed_quantity < 0)"
+
+  - name: int_orders
+    description: One row per order. Amounts are sums of signed lines. Return amount is zero or negative.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests: [not_null]
+      - name: store_id
+        data_tests: [not_null]
+      - name: order_date
+        data_tests: [not_null]
+      - name: ordered_at_utc
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["completed", "cancelled"]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["online", "physical"]
+      - name: line_count
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: gross_sales_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: return_amount_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                max_value: 0
+                inclusive: true
+      - name: net_sales_centavos
+        data_tests: [not_null]
+      - name: units_sold
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: units_net
+        data_tests: [not_null]
+      - name: margin_centavos
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "net_sales_centavos = gross_sales_centavos + return_amount_centavos"
+
+  - name: int_customer_orders
+    description: Completed-order history at customer grain. Cancelled orders are excluded.
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: first_order_date
+        data_tests: [not_null]
+      - name: last_order_date
+        data_tests: [not_null]
+      - name: completed_order_count
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: completed_sale_orders
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: gmv_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: net_sales_centavos
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "first_order_date <= last_order_date"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "completed_sale_orders <= completed_order_count"
+
+  - name: int_inventory_daily
+    description: Snapshot plus available units, stockout flag, and on-hand cost at catalog cost.
+    columns:
+      - name: inventory_date
+        data_tests: [not_null]
+      - name: store_id
+        data_tests: [not_null]
+      - name: product_id
+        data_tests: [not_null]
+      - name: on_hand_units
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: reserved_units
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: available_units
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: is_stockout
+        data_tests: [not_null]
+      - name: on_hand_cost_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: category
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - inventory_date
+              - store_id
+              - product_id
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "available_units = on_hand_units - reserved_units"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(is_stockout and available_units = 0) or (not is_stockout and available_units > 0)"

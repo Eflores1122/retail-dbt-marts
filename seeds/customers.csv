@@ -1,0 +1,401 @@
+customer_id,given_name,family_name,email,city,state_code,registered_on
+1,Ana,Sintetico0001,cliente.sintetico.0001@sintetico.invalid,Leon,GUA,2024-06-23
+2,Luis,Sintetico0002,cliente.sintetico.0002@sintetico.invalid,Ciudad de Mexico,CMX,2024-12-07
+3,Carmen,Sintetico0003,cliente.sintetico.0003@sintetico.invalid,Guadalajara,JAL,2024-10-15
+4,Jose,Sintetico0004,cliente.sintetico.0004@sintetico.invalid,Toluca,MEX,2024-06-13
+5,Maria,Sintetico0005,cliente.sintetico.0005@sintetico.invalid,Queretaro,QUE,2025-09-10
+6,Diego,Sintetico0006,cliente.sintetico.0006@sintetico.invalid,Ciudad de Mexico,CMX,2025-10-26
+7,Sofia,Sintetico0007,cliente.sintetico.0007@sintetico.invalid,Puebla,PUE,2024-04-02
+8,Miguel,Sintetico0008,cliente.sintetico.0008@sintetico.invalid,Ciudad de Mexico,CMX,2024-06-04
+9,Valeria,Sintetico0009,cliente.sintetico.0009@sintetico.invalid,Naucalpan,MEX,2024-10-25
+10,Jorge,Sintetico0010,cliente.sintetico.0010@sintetico.invalid,Merida,YUC,2025-11-07
+11,Lucia,Sintetico0011,cliente.sintetico.0011@sintetico.invalid,Ciudad de Mexico,CMX,2025-09-26
+12,Pedro,Sintetico0012,cliente.sintetico.0012@sintetico.invalid,Naucalpan,MEX,2025-09-10
+13,Fernanda,Sintetico0013,cliente.sintetico.0013@sintetico.invalid,Monterrey,NLE,2024-10-12
+14,Andres,Sintetico0014,cliente.sintetico.0014@sintetico.invalid,Puebla,PUE,2025-10-25
+15,Paula,Sintetico0015,cliente.sintetico.0015@sintetico.invalid,Guadalajara,JAL,2024-03-07
+16,Ricardo,Sintetico0016,cliente.sintetico.0016@sintetico.invalid,Xalapa,VER,2024-08-11
+17,Elena,Sintetico0017,cliente.sintetico.0017@sintetico.invalid,Queretaro,QUE,2025-05-07
+18,Hugo,Sintetico0018,cliente.sintetico.0018@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-12-10
+19,Renata,Sintetico0019,cliente.sintetico.0019@sintetico.invalid,Toluca,MEX,2024-10-07
+20,Oscar,Sintetico0020,cliente.sintetico.0020@sintetico.invalid,Xalapa,VER,2025-02-08
+21,Daniela,Sintetico0021,cliente.sintetico.0021@sintetico.invalid,Ciudad de Mexico,CMX,2024-06-03
+22,Emilio,Sintetico0022,cliente.sintetico.0022@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-06-08
+23,Camila,Sintetico0023,cliente.sintetico.0023@sintetico.invalid,Monterrey,NLE,2025-02-16
+24,Raul,Sintetico0024,cliente.sintetico.0024@sintetico.invalid,Mexicali,BCN,2024-11-26
+25,Regina,Sintetico0025,cliente.sintetico.0025@sintetico.invalid,Ciudad de Mexico,CMX,2025-06-14
+26,Ivan,Sintetico0026,cliente.sintetico.0026@sintetico.invalid,Merida,YUC,2024-07-06
+27,Ximena,Sintetico0027,cliente.sintetico.0027@sintetico.invalid,Monterrey,NLE,2024-05-20
+28,Mateo,Sintetico0028,cliente.sintetico.0028@sintetico.invalid,Mexicali,BCN,2024-12-26
+29,Natalia,Sintetico0029,cliente.sintetico.0029@sintetico.invalid,Leon,GUA,2025-11-24
+30,Adrian,Sintetico0030,cliente.sintetico.0030@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-10-13
+31,Ana,Sintetico0031,cliente.sintetico.0031@sintetico.invalid,Toluca,MEX,2024-05-11
+32,Luis,Sintetico0032,cliente.sintetico.0032@sintetico.invalid,Ciudad de Mexico,CMX,2024-10-20
+33,Carmen,Sintetico0033,cliente.sintetico.0033@sintetico.invalid,Veracruz,VER,2024-12-22
+34,Jose,Sintetico0034,cliente.sintetico.0034@sintetico.invalid,Ciudad de Mexico,CMX,2024-10-25
+35,Maria,Sintetico0035,cliente.sintetico.0035@sintetico.invalid,Ciudad de Mexico,CMX,2025-03-25
+36,Diego,Sintetico0036,cliente.sintetico.0036@sintetico.invalid,Zapopan,JAL,2025-06-08
+37,Sofia,Sintetico0037,cliente.sintetico.0037@sintetico.invalid,Leon,GUA,2025-03-09
+38,Miguel,Sintetico0038,cliente.sintetico.0038@sintetico.invalid,Ecatepec,MEX,2025-03-15
+39,Valeria,Sintetico0039,cliente.sintetico.0039@sintetico.invalid,Monterrey,NLE,2024-10-01
+40,Jorge,Sintetico0040,cliente.sintetico.0040@sintetico.invalid,Leon,GUA,2024-11-29
+41,Lucia,Sintetico0041,cliente.sintetico.0041@sintetico.invalid,Queretaro,QUE,2024-05-13
+42,Pedro,Sintetico0042,cliente.sintetico.0042@sintetico.invalid,Mexicali,BCN,2025-12-11
+43,Fernanda,Sintetico0043,cliente.sintetico.0043@sintetico.invalid,Toluca,MEX,2025-08-29
+44,Andres,Sintetico0044,cliente.sintetico.0044@sintetico.invalid,Queretaro,QUE,2024-11-06
+45,Paula,Sintetico0045,cliente.sintetico.0045@sintetico.invalid,Naucalpan,MEX,2025-06-17
+46,Ricardo,Sintetico0046,cliente.sintetico.0046@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-12-02
+47,Elena,Sintetico0047,cliente.sintetico.0047@sintetico.invalid,Leon,GUA,2025-09-22
+48,Hugo,Sintetico0048,cliente.sintetico.0048@sintetico.invalid,Zapopan,JAL,2025-01-27
+49,Renata,Sintetico0049,cliente.sintetico.0049@sintetico.invalid,Veracruz,VER,2024-04-27
+50,Oscar,Sintetico0050,cliente.sintetico.0050@sintetico.invalid,Zapopan,JAL,2024-04-02
+51,Daniela,Sintetico0051,cliente.sintetico.0051@sintetico.invalid,Guadalajara,JAL,2025-04-15
+52,Emilio,Sintetico0052,cliente.sintetico.0052@sintetico.invalid,Zapopan,JAL,2024-05-07
+53,Camila,Sintetico0053,cliente.sintetico.0053@sintetico.invalid,Ecatepec,MEX,2025-10-02
+54,Raul,Sintetico0054,cliente.sintetico.0054@sintetico.invalid,Queretaro,QUE,2025-01-17
+55,Regina,Sintetico0055,cliente.sintetico.0055@sintetico.invalid,Toluca,MEX,2025-07-25
+56,Ivan,Sintetico0056,cliente.sintetico.0056@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-12-19
+57,Ximena,Sintetico0057,cliente.sintetico.0057@sintetico.invalid,Puebla,PUE,2024-07-25
+58,Mateo,Sintetico0058,cliente.sintetico.0058@sintetico.invalid,Zapopan,JAL,2024-07-21
+59,Natalia,Sintetico0059,cliente.sintetico.0059@sintetico.invalid,Guadalajara,JAL,2025-09-26
+60,Adrian,Sintetico0060,cliente.sintetico.0060@sintetico.invalid,Merida,YUC,2024-11-25
+61,Ana,Sintetico0061,cliente.sintetico.0061@sintetico.invalid,Veracruz,VER,2025-10-20
+62,Luis,Sintetico0062,cliente.sintetico.0062@sintetico.invalid,Puebla,PUE,2025-10-19
+63,Carmen,Sintetico0063,cliente.sintetico.0063@sintetico.invalid,Monterrey,NLE,2025-03-06
+64,Jose,Sintetico0064,cliente.sintetico.0064@sintetico.invalid,Zapopan,JAL,2024-07-20
+65,Maria,Sintetico0065,cliente.sintetico.0065@sintetico.invalid,Merida,YUC,2025-07-19
+66,Diego,Sintetico0066,cliente.sintetico.0066@sintetico.invalid,Ciudad de Mexico,CMX,2024-04-18
+67,Sofia,Sintetico0067,cliente.sintetico.0067@sintetico.invalid,Ciudad de Mexico,CMX,2024-08-04
+68,Miguel,Sintetico0068,cliente.sintetico.0068@sintetico.invalid,Leon,GUA,2024-08-11
+69,Valeria,Sintetico0069,cliente.sintetico.0069@sintetico.invalid,Queretaro,QUE,2025-05-07
+70,Jorge,Sintetico0070,cliente.sintetico.0070@sintetico.invalid,Mexicali,BCN,2024-05-05
+71,Lucia,Sintetico0071,cliente.sintetico.0071@sintetico.invalid,Monterrey,NLE,2025-03-26
+72,Pedro,Sintetico0072,cliente.sintetico.0072@sintetico.invalid,Mexicali,BCN,2025-06-23
+73,Fernanda,Sintetico0073,cliente.sintetico.0073@sintetico.invalid,Merida,YUC,2024-11-13
+74,Andres,Sintetico0074,cliente.sintetico.0074@sintetico.invalid,Mexicali,BCN,2024-03-12
+75,Paula,Sintetico0075,cliente.sintetico.0075@sintetico.invalid,Queretaro,QUE,2024-06-26
+76,Ricardo,Sintetico0076,cliente.sintetico.0076@sintetico.invalid,Queretaro,QUE,2025-09-01
+77,Elena,Sintetico0077,cliente.sintetico.0077@sintetico.invalid,Veracruz,VER,2024-11-29
+78,Hugo,Sintetico0078,cliente.sintetico.0078@sintetico.invalid,Xalapa,VER,2025-12-17
+79,Renata,Sintetico0079,cliente.sintetico.0079@sintetico.invalid,Monterrey,NLE,2024-06-23
+80,Oscar,Sintetico0080,cliente.sintetico.0080@sintetico.invalid,Zapopan,JAL,2025-05-20
+81,Daniela,Sintetico0081,cliente.sintetico.0081@sintetico.invalid,Naucalpan,MEX,2025-06-08
+82,Emilio,Sintetico0082,cliente.sintetico.0082@sintetico.invalid,Ciudad de Mexico,CMX,2024-11-25
+83,Camila,Sintetico0083,cliente.sintetico.0083@sintetico.invalid,Merida,YUC,2024-08-30
+84,Raul,Sintetico0084,cliente.sintetico.0084@sintetico.invalid,Merida,YUC,2024-06-17
+85,Regina,Sintetico0085,cliente.sintetico.0085@sintetico.invalid,Leon,GUA,2024-12-31
+86,Ivan,Sintetico0086,cliente.sintetico.0086@sintetico.invalid,Leon,GUA,2025-08-02
+87,Ximena,Sintetico0087,cliente.sintetico.0087@sintetico.invalid,Tijuana,BCN,2024-09-20
+88,Mateo,Sintetico0088,cliente.sintetico.0088@sintetico.invalid,Toluca,MEX,2025-03-18
+89,Natalia,Sintetico0089,cliente.sintetico.0089@sintetico.invalid,Veracruz,VER,2024-08-13
+90,Adrian,Sintetico0090,cliente.sintetico.0090@sintetico.invalid,Merida,YUC,2025-08-26
+91,Ana,Sintetico0091,cliente.sintetico.0091@sintetico.invalid,Ciudad de Mexico,CMX,2025-11-04
+92,Luis,Sintetico0092,cliente.sintetico.0092@sintetico.invalid,Zapopan,JAL,2025-07-14
+93,Carmen,Sintetico0093,cliente.sintetico.0093@sintetico.invalid,Ciudad de Mexico,CMX,2024-06-23
+94,Jose,Sintetico0094,cliente.sintetico.0094@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-01-09
+95,Maria,Sintetico0095,cliente.sintetico.0095@sintetico.invalid,Guadalajara,JAL,2024-04-29
+96,Diego,Sintetico0096,cliente.sintetico.0096@sintetico.invalid,Zapopan,JAL,2025-10-02
+97,Sofia,Sintetico0097,cliente.sintetico.0097@sintetico.invalid,Ciudad de Mexico,CMX,2024-05-27
+98,Miguel,Sintetico0098,cliente.sintetico.0098@sintetico.invalid,Queretaro,QUE,2025-07-11
+99,Valeria,Sintetico0099,cliente.sintetico.0099@sintetico.invalid,Ciudad de Mexico,CMX,2025-08-28
+100,Jorge,Sintetico0100,cliente.sintetico.0100@sintetico.invalid,Xalapa,VER,2024-07-07
+101,Lucia,Sintetico0101,cliente.sintetico.0101@sintetico.invalid,Ecatepec,MEX,2025-06-30
+102,Pedro,Sintetico0102,cliente.sintetico.0102@sintetico.invalid,Mexicali,BCN,2024-08-17
+103,Fernanda,Sintetico0103,cliente.sintetico.0103@sintetico.invalid,Guadalajara,JAL,2025-08-23
+104,Andres,Sintetico0104,cliente.sintetico.0104@sintetico.invalid,Mexicali,BCN,2025-05-08
+105,Paula,Sintetico0105,cliente.sintetico.0105@sintetico.invalid,Naucalpan,MEX,2025-09-04
+106,Ricardo,Sintetico0106,cliente.sintetico.0106@sintetico.invalid,Xalapa,VER,2024-09-22
+107,Elena,Sintetico0107,cliente.sintetico.0107@sintetico.invalid,Queretaro,QUE,2025-01-14
+108,Hugo,Sintetico0108,cliente.sintetico.0108@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-03-18
+109,Renata,Sintetico0109,cliente.sintetico.0109@sintetico.invalid,Puebla,PUE,2025-08-12
+110,Oscar,Sintetico0110,cliente.sintetico.0110@sintetico.invalid,Puebla,PUE,2024-07-02
+111,Daniela,Sintetico0111,cliente.sintetico.0111@sintetico.invalid,Guadalajara,JAL,2024-10-17
+112,Emilio,Sintetico0112,cliente.sintetico.0112@sintetico.invalid,Ciudad de Mexico,CMX,2025-02-10
+113,Camila,Sintetico0113,cliente.sintetico.0113@sintetico.invalid,Ciudad de Mexico,CMX,2025-10-24
+114,Raul,Sintetico0114,cliente.sintetico.0114@sintetico.invalid,Mexicali,BCN,2024-10-22
+115,Regina,Sintetico0115,cliente.sintetico.0115@sintetico.invalid,Tijuana,BCN,2024-10-12
+116,Ivan,Sintetico0116,cliente.sintetico.0116@sintetico.invalid,Ciudad de Mexico,CMX,2024-05-12
+117,Ximena,Sintetico0117,cliente.sintetico.0117@sintetico.invalid,Queretaro,QUE,2025-12-07
+118,Mateo,Sintetico0118,cliente.sintetico.0118@sintetico.invalid,Ciudad de Mexico,CMX,2024-10-21
+119,Natalia,Sintetico0119,cliente.sintetico.0119@sintetico.invalid,Ciudad de Mexico,CMX,2024-04-02
+120,Adrian,Sintetico0120,cliente.sintetico.0120@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-05-12
+121,Ana,Sintetico0121,cliente.sintetico.0121@sintetico.invalid,Merida,YUC,2024-10-30
+122,Luis,Sintetico0122,cliente.sintetico.0122@sintetico.invalid,Zapopan,JAL,2025-07-11
+123,Carmen,Sintetico0123,cliente.sintetico.0123@sintetico.invalid,Naucalpan,MEX,2025-09-04
+124,Jose,Sintetico0124,cliente.sintetico.0124@sintetico.invalid,Toluca,MEX,2025-10-06
+125,Maria,Sintetico0125,cliente.sintetico.0125@sintetico.invalid,Tijuana,BCN,2025-06-28
+126,Diego,Sintetico0126,cliente.sintetico.0126@sintetico.invalid,Zapopan,JAL,2025-06-28
+127,Sofia,Sintetico0127,cliente.sintetico.0127@sintetico.invalid,Monterrey,NLE,2024-09-11
+128,Miguel,Sintetico0128,cliente.sintetico.0128@sintetico.invalid,Ciudad de Mexico,CMX,2024-06-08
+129,Valeria,Sintetico0129,cliente.sintetico.0129@sintetico.invalid,Leon,GUA,2025-05-16
+130,Jorge,Sintetico0130,cliente.sintetico.0130@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-05-08
+131,Lucia,Sintetico0131,cliente.sintetico.0131@sintetico.invalid,Monterrey,NLE,2025-06-22
+132,Pedro,Sintetico0132,cliente.sintetico.0132@sintetico.invalid,Queretaro,QUE,2024-04-25
+133,Fernanda,Sintetico0133,cliente.sintetico.0133@sintetico.invalid,Queretaro,QUE,2024-06-09
+134,Andres,Sintetico0134,cliente.sintetico.0134@sintetico.invalid,Ciudad de Mexico,CMX,2025-04-17
+135,Paula,Sintetico0135,cliente.sintetico.0135@sintetico.invalid,Queretaro,QUE,2025-02-11
+136,Ricardo,Sintetico0136,cliente.sintetico.0136@sintetico.invalid,Ciudad de Mexico,CMX,2024-11-10
+137,Elena,Sintetico0137,cliente.sintetico.0137@sintetico.invalid,Ecatepec,MEX,2024-09-11
+138,Hugo,Sintetico0138,cliente.sintetico.0138@sintetico.invalid,Merida,YUC,2025-06-03
+139,Renata,Sintetico0139,cliente.sintetico.0139@sintetico.invalid,Toluca,MEX,2025-05-07
+140,Oscar,Sintetico0140,cliente.sintetico.0140@sintetico.invalid,Ecatepec,MEX,2024-12-11
+141,Daniela,Sintetico0141,cliente.sintetico.0141@sintetico.invalid,Puebla,PUE,2024-11-11
+142,Emilio,Sintetico0142,cliente.sintetico.0142@sintetico.invalid,Ciudad de Mexico,CMX,2025-05-28
+143,Camila,Sintetico0143,cliente.sintetico.0143@sintetico.invalid,Tijuana,BCN,2024-06-09
+144,Raul,Sintetico0144,cliente.sintetico.0144@sintetico.invalid,Ciudad de Mexico,CMX,2025-09-05
+145,Regina,Sintetico0145,cliente.sintetico.0145@sintetico.invalid,Ciudad de Mexico,CMX,2024-06-04
+146,Ivan,Sintetico0146,cliente.sintetico.0146@sintetico.invalid,Xalapa,VER,2024-10-29
+147,Ximena,Sintetico0147,cliente.sintetico.0147@sintetico.invalid,Naucalpan,MEX,2025-04-21
+148,Mateo,Sintetico0148,cliente.sintetico.0148@sintetico.invalid,Merida,YUC,2025-07-06
+149,Natalia,Sintetico0149,cliente.sintetico.0149@sintetico.invalid,Ecatepec,MEX,2025-04-15
+150,Adrian,Sintetico0150,cliente.sintetico.0150@sintetico.invalid,Ciudad de Mexico,CMX,2024-08-16
+151,Ana,Sintetico0151,cliente.sintetico.0151@sintetico.invalid,Monterrey,NLE,2024-03-03
+152,Luis,Sintetico0152,cliente.sintetico.0152@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-11-27
+153,Carmen,Sintetico0153,cliente.sintetico.0153@sintetico.invalid,Puebla,PUE,2024-12-18
+154,Jose,Sintetico0154,cliente.sintetico.0154@sintetico.invalid,Puebla,PUE,2025-09-21
+155,Maria,Sintetico0155,cliente.sintetico.0155@sintetico.invalid,Leon,GUA,2025-07-12
+156,Diego,Sintetico0156,cliente.sintetico.0156@sintetico.invalid,Naucalpan,MEX,2024-09-11
+157,Sofia,Sintetico0157,cliente.sintetico.0157@sintetico.invalid,Guadalajara,JAL,2024-10-09
+158,Miguel,Sintetico0158,cliente.sintetico.0158@sintetico.invalid,Ciudad de Mexico,CMX,2025-10-15
+159,Valeria,Sintetico0159,cliente.sintetico.0159@sintetico.invalid,Veracruz,VER,2025-09-07
+160,Jorge,Sintetico0160,cliente.sintetico.0160@sintetico.invalid,Ciudad de Mexico,CMX,2025-01-16
+161,Lucia,Sintetico0161,cliente.sintetico.0161@sintetico.invalid,Ciudad de Mexico,CMX,2024-04-21
+162,Pedro,Sintetico0162,cliente.sintetico.0162@sintetico.invalid,Mexicali,BCN,2025-07-02
+163,Fernanda,Sintetico0163,cliente.sintetico.0163@sintetico.invalid,Merida,YUC,2025-08-26
+164,Andres,Sintetico0164,cliente.sintetico.0164@sintetico.invalid,Ecatepec,MEX,2024-04-28
+165,Paula,Sintetico0165,cliente.sintetico.0165@sintetico.invalid,Merida,YUC,2024-05-22
+166,Ricardo,Sintetico0166,cliente.sintetico.0166@sintetico.invalid,Toluca,MEX,2024-05-10
+167,Elena,Sintetico0167,cliente.sintetico.0167@sintetico.invalid,Tijuana,BCN,2024-05-09
+168,Hugo,Sintetico0168,cliente.sintetico.0168@sintetico.invalid,Queretaro,QUE,2024-10-27
+169,Renata,Sintetico0169,cliente.sintetico.0169@sintetico.invalid,Monterrey,NLE,2024-07-01
+170,Oscar,Sintetico0170,cliente.sintetico.0170@sintetico.invalid,Mexicali,BCN,2024-11-08
+171,Daniela,Sintetico0171,cliente.sintetico.0171@sintetico.invalid,Tijuana,BCN,2025-10-30
+172,Emilio,Sintetico0172,cliente.sintetico.0172@sintetico.invalid,Ciudad de Mexico,CMX,2025-11-25
+173,Camila,Sintetico0173,cliente.sintetico.0173@sintetico.invalid,Ciudad de Mexico,CMX,2025-05-04
+174,Raul,Sintetico0174,cliente.sintetico.0174@sintetico.invalid,Leon,GUA,2025-10-19
+175,Regina,Sintetico0175,cliente.sintetico.0175@sintetico.invalid,Tijuana,BCN,2025-08-18
+176,Ivan,Sintetico0176,cliente.sintetico.0176@sintetico.invalid,Zapopan,JAL,2024-11-23
+177,Ximena,Sintetico0177,cliente.sintetico.0177@sintetico.invalid,Naucalpan,MEX,2025-01-16
+178,Mateo,Sintetico0178,cliente.sintetico.0178@sintetico.invalid,Zapopan,JAL,2024-11-27
+179,Natalia,Sintetico0179,cliente.sintetico.0179@sintetico.invalid,Monterrey,NLE,2024-07-13
+180,Adrian,Sintetico0180,cliente.sintetico.0180@sintetico.invalid,Leon,GUA,2025-01-02
+181,Ana,Sintetico0181,cliente.sintetico.0181@sintetico.invalid,Puebla,PUE,2025-01-18
+182,Luis,Sintetico0182,cliente.sintetico.0182@sintetico.invalid,Xalapa,VER,2024-05-14
+183,Carmen,Sintetico0183,cliente.sintetico.0183@sintetico.invalid,Ciudad de Mexico,CMX,2025-06-13
+184,Jose,Sintetico0184,cliente.sintetico.0184@sintetico.invalid,Leon,GUA,2025-09-28
+185,Maria,Sintetico0185,cliente.sintetico.0185@sintetico.invalid,Ciudad de Mexico,CMX,2024-05-15
+186,Diego,Sintetico0186,cliente.sintetico.0186@sintetico.invalid,Merida,YUC,2024-10-05
+187,Sofia,Sintetico0187,cliente.sintetico.0187@sintetico.invalid,Merida,YUC,2024-11-27
+188,Miguel,Sintetico0188,cliente.sintetico.0188@sintetico.invalid,Ecatepec,MEX,2025-02-21
+189,Valeria,Sintetico0189,cliente.sintetico.0189@sintetico.invalid,Ciudad de Mexico,CMX,2024-11-06
+190,Jorge,Sintetico0190,cliente.sintetico.0190@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-12-17
+191,Lucia,Sintetico0191,cliente.sintetico.0191@sintetico.invalid,Ecatepec,MEX,2025-05-23
+192,Pedro,Sintetico0192,cliente.sintetico.0192@sintetico.invalid,Merida,YUC,2025-01-04
+193,Fernanda,Sintetico0193,cliente.sintetico.0193@sintetico.invalid,Leon,GUA,2025-08-24
+194,Andres,Sintetico0194,cliente.sintetico.0194@sintetico.invalid,Ciudad de Mexico,CMX,2025-09-19
+195,Paula,Sintetico0195,cliente.sintetico.0195@sintetico.invalid,Guadalajara,JAL,2024-06-15
+196,Ricardo,Sintetico0196,cliente.sintetico.0196@sintetico.invalid,Toluca,MEX,2024-11-26
+197,Elena,Sintetico0197,cliente.sintetico.0197@sintetico.invalid,Ciudad de Mexico,CMX,2024-06-18
+198,Hugo,Sintetico0198,cliente.sintetico.0198@sintetico.invalid,Xalapa,VER,2025-09-18
+199,Renata,Sintetico0199,cliente.sintetico.0199@sintetico.invalid,Toluca,MEX,2024-12-04
+200,Oscar,Sintetico0200,cliente.sintetico.0200@sintetico.invalid,Zapopan,JAL,2025-11-10
+201,Daniela,Sintetico0201,cliente.sintetico.0201@sintetico.invalid,Naucalpan,MEX,2025-02-15
+202,Emilio,Sintetico0202,cliente.sintetico.0202@sintetico.invalid,Toluca,MEX,2025-12-10
+203,Camila,Sintetico0203,cliente.sintetico.0203@sintetico.invalid,Guadalajara,JAL,2025-07-31
+204,Raul,Sintetico0204,cliente.sintetico.0204@sintetico.invalid,Merida,YUC,2024-11-13
+205,Regina,Sintetico0205,cliente.sintetico.0205@sintetico.invalid,Ciudad de Mexico,CMX,2024-06-03
+206,Ivan,Sintetico0206,cliente.sintetico.0206@sintetico.invalid,Leon,GUA,2025-05-08
+207,Ximena,Sintetico0207,cliente.sintetico.0207@sintetico.invalid,Guadalajara,JAL,2024-04-15
+208,Mateo,Sintetico0208,cliente.sintetico.0208@sintetico.invalid,Ciudad de Mexico,CMX,2025-02-05
+209,Natalia,Sintetico0209,cliente.sintetico.0209@sintetico.invalid,Veracruz,VER,2024-07-12
+210,Adrian,Sintetico0210,cliente.sintetico.0210@sintetico.invalid,Leon,GUA,2024-11-24
+211,Ana,Sintetico0211,cliente.sintetico.0211@sintetico.invalid,Toluca,MEX,2025-05-27
+212,Luis,Sintetico0212,cliente.sintetico.0212@sintetico.invalid,Mexicali,BCN,2025-05-12
+213,Carmen,Sintetico0213,cliente.sintetico.0213@sintetico.invalid,Tijuana,BCN,2024-03-10
+214,Jose,Sintetico0214,cliente.sintetico.0214@sintetico.invalid,Ciudad de Mexico,CMX,2024-05-17
+215,Maria,Sintetico0215,cliente.sintetico.0215@sintetico.invalid,Queretaro,QUE,2024-07-31
+216,Diego,Sintetico0216,cliente.sintetico.0216@sintetico.invalid,Merida,YUC,2024-04-06
+217,Sofia,Sintetico0217,cliente.sintetico.0217@sintetico.invalid,Monterrey,NLE,2025-10-18
+218,Miguel,Sintetico0218,cliente.sintetico.0218@sintetico.invalid,Mexicali,BCN,2024-07-30
+219,Valeria,Sintetico0219,cliente.sintetico.0219@sintetico.invalid,Puebla,PUE,2024-07-09
+220,Jorge,Sintetico0220,cliente.sintetico.0220@sintetico.invalid,Ciudad de Mexico,CMX,2025-01-10
+221,Lucia,Sintetico0221,cliente.sintetico.0221@sintetico.invalid,Monterrey,NLE,2024-04-10
+222,Pedro,Sintetico0222,cliente.sintetico.0222@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-10-02
+223,Fernanda,Sintetico0223,cliente.sintetico.0223@sintetico.invalid,Queretaro,QUE,2024-11-11
+224,Andres,Sintetico0224,cliente.sintetico.0224@sintetico.invalid,Leon,GUA,2024-06-14
+225,Paula,Sintetico0225,cliente.sintetico.0225@sintetico.invalid,Monterrey,NLE,2025-09-25
+226,Ricardo,Sintetico0226,cliente.sintetico.0226@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-11-26
+227,Elena,Sintetico0227,cliente.sintetico.0227@sintetico.invalid,Veracruz,VER,2024-08-06
+228,Hugo,Sintetico0228,cliente.sintetico.0228@sintetico.invalid,Zapopan,JAL,2024-08-14
+229,Renata,Sintetico0229,cliente.sintetico.0229@sintetico.invalid,Toluca,MEX,2025-04-27
+230,Oscar,Sintetico0230,cliente.sintetico.0230@sintetico.invalid,Ciudad de Mexico,CMX,2024-08-31
+231,Daniela,Sintetico0231,cliente.sintetico.0231@sintetico.invalid,Veracruz,VER,2025-02-04
+232,Emilio,Sintetico0232,cliente.sintetico.0232@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-11-10
+233,Camila,Sintetico0233,cliente.sintetico.0233@sintetico.invalid,Guadalajara,JAL,2024-08-11
+234,Raul,Sintetico0234,cliente.sintetico.0234@sintetico.invalid,Queretaro,QUE,2024-06-19
+235,Regina,Sintetico0235,cliente.sintetico.0235@sintetico.invalid,Monterrey,NLE,2024-04-09
+236,Ivan,Sintetico0236,cliente.sintetico.0236@sintetico.invalid,Puebla,PUE,2024-10-14
+237,Ximena,Sintetico0237,cliente.sintetico.0237@sintetico.invalid,Naucalpan,MEX,2025-06-15
+238,Mateo,Sintetico0238,cliente.sintetico.0238@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-01-07
+239,Natalia,Sintetico0239,cliente.sintetico.0239@sintetico.invalid,Guadalajara,JAL,2024-10-15
+240,Adrian,Sintetico0240,cliente.sintetico.0240@sintetico.invalid,Ciudad de Mexico,CMX,2024-09-14
+241,Ana,Sintetico0241,cliente.sintetico.0241@sintetico.invalid,Monterrey,NLE,2025-01-31
+242,Luis,Sintetico0242,cliente.sintetico.0242@sintetico.invalid,Zapopan,JAL,2024-05-11
+243,Carmen,Sintetico0243,cliente.sintetico.0243@sintetico.invalid,Veracruz,VER,2024-12-11
+244,Jose,Sintetico0244,cliente.sintetico.0244@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-12-17
+245,Maria,Sintetico0245,cliente.sintetico.0245@sintetico.invalid,Merida,YUC,2025-04-14
+246,Diego,Sintetico0246,cliente.sintetico.0246@sintetico.invalid,Queretaro,QUE,2025-09-01
+247,Sofia,Sintetico0247,cliente.sintetico.0247@sintetico.invalid,Monterrey,NLE,2024-03-29
+248,Miguel,Sintetico0248,cliente.sintetico.0248@sintetico.invalid,Ciudad de Mexico,CMX,2024-11-23
+249,Valeria,Sintetico0249,cliente.sintetico.0249@sintetico.invalid,Naucalpan,MEX,2025-10-16
+250,Jorge,Sintetico0250,cliente.sintetico.0250@sintetico.invalid,Zapopan,JAL,2024-04-09
+251,Lucia,Sintetico0251,cliente.sintetico.0251@sintetico.invalid,Ciudad de Mexico,CMX,2025-11-01
+252,Pedro,Sintetico0252,cliente.sintetico.0252@sintetico.invalid,Puebla,PUE,2025-02-17
+253,Fernanda,Sintetico0253,cliente.sintetico.0253@sintetico.invalid,Queretaro,QUE,2025-01-16
+254,Andres,Sintetico0254,cliente.sintetico.0254@sintetico.invalid,Puebla,PUE,2025-11-11
+255,Paula,Sintetico0255,cliente.sintetico.0255@sintetico.invalid,Merida,YUC,2024-06-27
+256,Ricardo,Sintetico0256,cliente.sintetico.0256@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-10-12
+257,Elena,Sintetico0257,cliente.sintetico.0257@sintetico.invalid,Ecatepec,MEX,2024-11-16
+258,Hugo,Sintetico0258,cliente.sintetico.0258@sintetico.invalid,Ciudad de Mexico,CMX,2025-05-21
+259,Renata,Sintetico0259,cliente.sintetico.0259@sintetico.invalid,Ciudad de Mexico,CMX,2025-08-15
+260,Oscar,Sintetico0260,cliente.sintetico.0260@sintetico.invalid,Merida,YUC,2024-09-18
+261,Daniela,Sintetico0261,cliente.sintetico.0261@sintetico.invalid,Monterrey,NLE,2025-05-16
+262,Emilio,Sintetico0262,cliente.sintetico.0262@sintetico.invalid,Ciudad de Mexico,CMX,2025-02-02
+263,Camila,Sintetico0263,cliente.sintetico.0263@sintetico.invalid,Leon,GUA,2025-01-16
+264,Raul,Sintetico0264,cliente.sintetico.0264@sintetico.invalid,Leon,GUA,2024-07-06
+265,Regina,Sintetico0265,cliente.sintetico.0265@sintetico.invalid,Queretaro,QUE,2025-01-02
+266,Ivan,Sintetico0266,cliente.sintetico.0266@sintetico.invalid,Merida,YUC,2025-01-11
+267,Ximena,Sintetico0267,cliente.sintetico.0267@sintetico.invalid,Leon,GUA,2025-04-23
+268,Mateo,Sintetico0268,cliente.sintetico.0268@sintetico.invalid,Zapopan,JAL,2025-04-17
+269,Natalia,Sintetico0269,cliente.sintetico.0269@sintetico.invalid,Queretaro,QUE,2024-12-28
+270,Adrian,Sintetico0270,cliente.sintetico.0270@sintetico.invalid,Mexicali,BCN,2024-07-09
+271,Ana,Sintetico0271,cliente.sintetico.0271@sintetico.invalid,Toluca,MEX,2025-05-05
+272,Luis,Sintetico0272,cliente.sintetico.0272@sintetico.invalid,Leon,GUA,2025-03-24
+273,Carmen,Sintetico0273,cliente.sintetico.0273@sintetico.invalid,Queretaro,QUE,2024-08-26
+274,Jose,Sintetico0274,cliente.sintetico.0274@sintetico.invalid,Leon,GUA,2025-10-04
+275,Maria,Sintetico0275,cliente.sintetico.0275@sintetico.invalid,Guadalajara,JAL,2025-04-20
+276,Diego,Sintetico0276,cliente.sintetico.0276@sintetico.invalid,Mexicali,BCN,2024-03-01
+277,Sofia,Sintetico0277,cliente.sintetico.0277@sintetico.invalid,Guadalajara,JAL,2024-12-19
+278,Miguel,Sintetico0278,cliente.sintetico.0278@sintetico.invalid,Ecatepec,MEX,2025-05-15
+279,Valeria,Sintetico0279,cliente.sintetico.0279@sintetico.invalid,Tijuana,BCN,2025-11-12
+280,Jorge,Sintetico0280,cliente.sintetico.0280@sintetico.invalid,Leon,GUA,2025-01-24
+281,Lucia,Sintetico0281,cliente.sintetico.0281@sintetico.invalid,Puebla,PUE,2025-05-27
+282,Pedro,Sintetico0282,cliente.sintetico.0282@sintetico.invalid,Puebla,PUE,2024-10-05
+283,Fernanda,Sintetico0283,cliente.sintetico.0283@sintetico.invalid,Merida,YUC,2025-06-28
+284,Andres,Sintetico0284,cliente.sintetico.0284@sintetico.invalid,Xalapa,VER,2024-08-21
+285,Paula,Sintetico0285,cliente.sintetico.0285@sintetico.invalid,Leon,GUA,2024-05-26
+286,Ricardo,Sintetico0286,cliente.sintetico.0286@sintetico.invalid,Zapopan,JAL,2025-08-10
+287,Elena,Sintetico0287,cliente.sintetico.0287@sintetico.invalid,Leon,GUA,2025-12-09
+288,Hugo,Sintetico0288,cliente.sintetico.0288@sintetico.invalid,Leon,GUA,2025-02-07
+289,Renata,Sintetico0289,cliente.sintetico.0289@sintetico.invalid,Ciudad de Mexico,CMX,2024-10-27
+290,Oscar,Sintetico0290,cliente.sintetico.0290@sintetico.invalid,Queretaro,QUE,2025-01-12
+291,Daniela,Sintetico0291,cliente.sintetico.0291@sintetico.invalid,Guadalajara,JAL,2024-09-20
+292,Emilio,Sintetico0292,cliente.sintetico.0292@sintetico.invalid,Toluca,MEX,2024-03-26
+293,Camila,Sintetico0293,cliente.sintetico.0293@sintetico.invalid,Ciudad de Mexico,CMX,2024-11-06
+294,Raul,Sintetico0294,cliente.sintetico.0294@sintetico.invalid,Puebla,PUE,2025-11-16
+295,Regina,Sintetico0295,cliente.sintetico.0295@sintetico.invalid,Veracruz,VER,2024-05-14
+296,Ivan,Sintetico0296,cliente.sintetico.0296@sintetico.invalid,Puebla,PUE,2025-04-29
+297,Ximena,Sintetico0297,cliente.sintetico.0297@sintetico.invalid,Leon,GUA,2025-10-11
+298,Mateo,Sintetico0298,cliente.sintetico.0298@sintetico.invalid,Toluca,MEX,2025-03-29
+299,Natalia,Sintetico0299,cliente.sintetico.0299@sintetico.invalid,Merida,YUC,2025-04-14
+300,Adrian,Sintetico0300,cliente.sintetico.0300@sintetico.invalid,Zapopan,JAL,2024-07-30
+301,Ana,Sintetico0301,cliente.sintetico.0301@sintetico.invalid,Leon,GUA,2024-03-06
+302,Luis,Sintetico0302,cliente.sintetico.0302@sintetico.invalid,Xalapa,VER,2024-06-18
+303,Carmen,Sintetico0303,cliente.sintetico.0303@sintetico.invalid,Veracruz,VER,2025-05-10
+304,Jose,Sintetico0304,cliente.sintetico.0304@sintetico.invalid,Zapopan,JAL,2024-08-28
+305,Maria,Sintetico0305,cliente.sintetico.0305@sintetico.invalid,Queretaro,QUE,2025-08-13
+306,Diego,Sintetico0306,cliente.sintetico.0306@sintetico.invalid,Puebla,PUE,2024-04-21
+307,Sofia,Sintetico0307,cliente.sintetico.0307@sintetico.invalid,Tijuana,BCN,2024-11-11
+308,Miguel,Sintetico0308,cliente.sintetico.0308@sintetico.invalid,Ciudad de Mexico,CMX,2025-06-11
+309,Valeria,Sintetico0309,cliente.sintetico.0309@sintetico.invalid,Naucalpan,MEX,2025-06-19
+310,Jorge,Sintetico0310,cliente.sintetico.0310@sintetico.invalid,Leon,GUA,2025-08-26
+311,Lucia,Sintetico0311,cliente.sintetico.0311@sintetico.invalid,Tijuana,BCN,2025-10-31
+312,Pedro,Sintetico0312,cliente.sintetico.0312@sintetico.invalid,Zapopan,JAL,2025-05-28
+313,Fernanda,Sintetico0313,cliente.sintetico.0313@sintetico.invalid,Leon,GUA,2025-07-30
+314,Andres,Sintetico0314,cliente.sintetico.0314@sintetico.invalid,Puebla,PUE,2025-09-13
+315,Paula,Sintetico0315,cliente.sintetico.0315@sintetico.invalid,Puebla,PUE,2024-08-10
+316,Ricardo,Sintetico0316,cliente.sintetico.0316@sintetico.invalid,Xalapa,VER,2025-06-30
+317,Elena,Sintetico0317,cliente.sintetico.0317@sintetico.invalid,Puebla,PUE,2024-11-21
+318,Hugo,Sintetico0318,cliente.sintetico.0318@sintetico.invalid,Xalapa,VER,2024-11-09
+319,Renata,Sintetico0319,cliente.sintetico.0319@sintetico.invalid,Leon,GUA,2024-12-09
+320,Oscar,Sintetico0320,cliente.sintetico.0320@sintetico.invalid,Xalapa,VER,2025-08-16
+321,Daniela,Sintetico0321,cliente.sintetico.0321@sintetico.invalid,Merida,YUC,2025-12-02
+322,Emilio,Sintetico0322,cliente.sintetico.0322@sintetico.invalid,Zapopan,JAL,2024-12-07
+323,Camila,Sintetico0323,cliente.sintetico.0323@sintetico.invalid,Puebla,PUE,2024-05-19
+324,Raul,Sintetico0324,cliente.sintetico.0324@sintetico.invalid,Queretaro,QUE,2024-12-18
+325,Regina,Sintetico0325,cliente.sintetico.0325@sintetico.invalid,Guadalajara,JAL,2024-12-04
+326,Ivan,Sintetico0326,cliente.sintetico.0326@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-01-22
+327,Ximena,Sintetico0327,cliente.sintetico.0327@sintetico.invalid,Merida,YUC,2024-05-22
+328,Mateo,Sintetico0328,cliente.sintetico.0328@sintetico.invalid,Toluca,MEX,2024-08-02
+329,Natalia,Sintetico0329,cliente.sintetico.0329@sintetico.invalid,Guadalajara,JAL,2025-03-28
+330,Adrian,Sintetico0330,cliente.sintetico.0330@sintetico.invalid,Queretaro,QUE,2024-08-04
+331,Ana,Sintetico0331,cliente.sintetico.0331@sintetico.invalid,Queretaro,QUE,2024-10-06
+332,Luis,Sintetico0332,cliente.sintetico.0332@sintetico.invalid,Ciudad de Mexico,CMX,2025-04-29
+333,Carmen,Sintetico0333,cliente.sintetico.0333@sintetico.invalid,Monterrey,NLE,2025-02-02
+334,Jose,Sintetico0334,cliente.sintetico.0334@sintetico.invalid,Merida,YUC,2025-06-21
+335,Maria,Sintetico0335,cliente.sintetico.0335@sintetico.invalid,Monterrey,NLE,2024-05-03
+336,Diego,Sintetico0336,cliente.sintetico.0336@sintetico.invalid,Naucalpan,MEX,2025-05-05
+337,Sofia,Sintetico0337,cliente.sintetico.0337@sintetico.invalid,Monterrey,NLE,2025-10-20
+338,Miguel,Sintetico0338,cliente.sintetico.0338@sintetico.invalid,Queretaro,QUE,2024-03-21
+339,Valeria,Sintetico0339,cliente.sintetico.0339@sintetico.invalid,Veracruz,VER,2025-10-11
+340,Jorge,Sintetico0340,cliente.sintetico.0340@sintetico.invalid,San Pedro Garza Garcia,NLE,2025-07-02
+341,Lucia,Sintetico0341,cliente.sintetico.0341@sintetico.invalid,Ciudad de Mexico,CMX,2025-02-24
+342,Pedro,Sintetico0342,cliente.sintetico.0342@sintetico.invalid,Zapopan,JAL,2025-04-04
+343,Fernanda,Sintetico0343,cliente.sintetico.0343@sintetico.invalid,Monterrey,NLE,2025-09-03
+344,Andres,Sintetico0344,cliente.sintetico.0344@sintetico.invalid,Xalapa,VER,2025-09-11
+345,Paula,Sintetico0345,cliente.sintetico.0345@sintetico.invalid,Tijuana,BCN,2024-10-12
+346,Ricardo,Sintetico0346,cliente.sintetico.0346@sintetico.invalid,Merida,YUC,2024-10-11
+347,Elena,Sintetico0347,cliente.sintetico.0347@sintetico.invalid,Guadalajara,JAL,2025-05-21
+348,Hugo,Sintetico0348,cliente.sintetico.0348@sintetico.invalid,Merida,YUC,2024-03-30
+349,Renata,Sintetico0349,cliente.sintetico.0349@sintetico.invalid,Monterrey,NLE,2025-02-08
+350,Oscar,Sintetico0350,cliente.sintetico.0350@sintetico.invalid,Leon,GUA,2025-04-19
+351,Daniela,Sintetico0351,cliente.sintetico.0351@sintetico.invalid,Queretaro,QUE,2024-08-17
+352,Emilio,Sintetico0352,cliente.sintetico.0352@sintetico.invalid,Puebla,PUE,2024-07-09
+353,Camila,Sintetico0353,cliente.sintetico.0353@sintetico.invalid,Leon,GUA,2025-08-29
+354,Raul,Sintetico0354,cliente.sintetico.0354@sintetico.invalid,Ciudad de Mexico,CMX,2025-04-08
+355,Regina,Sintetico0355,cliente.sintetico.0355@sintetico.invalid,Tijuana,BCN,2025-09-29
+356,Ivan,Sintetico0356,cliente.sintetico.0356@sintetico.invalid,Leon,GUA,2024-03-28
+357,Ximena,Sintetico0357,cliente.sintetico.0357@sintetico.invalid,Ciudad de Mexico,CMX,2025-12-19
+358,Mateo,Sintetico0358,cliente.sintetico.0358@sintetico.invalid,Puebla,PUE,2024-07-17
+359,Natalia,Sintetico0359,cliente.sintetico.0359@sintetico.invalid,Puebla,PUE,2024-09-03
+360,Adrian,Sintetico0360,cliente.sintetico.0360@sintetico.invalid,Ciudad de Mexico,CMX,2024-11-22
+361,Ana,Sintetico0361,cliente.sintetico.0361@sintetico.invalid,Monterrey,NLE,2025-01-30
+362,Luis,Sintetico0362,cliente.sintetico.0362@sintetico.invalid,Ecatepec,MEX,2025-06-09
+363,Carmen,Sintetico0363,cliente.sintetico.0363@sintetico.invalid,Guadalajara,JAL,2025-02-09
+364,Jose,Sintetico0364,cliente.sintetico.0364@sintetico.invalid,Xalapa,VER,2025-03-24
+365,Maria,Sintetico0365,cliente.sintetico.0365@sintetico.invalid,Guadalajara,JAL,2025-05-06
+366,Diego,Sintetico0366,cliente.sintetico.0366@sintetico.invalid,Zapopan,JAL,2024-05-23
+367,Sofia,Sintetico0367,cliente.sintetico.0367@sintetico.invalid,Puebla,PUE,2024-03-20
+368,Miguel,Sintetico0368,cliente.sintetico.0368@sintetico.invalid,Xalapa,VER,2025-09-04
+369,Valeria,Sintetico0369,cliente.sintetico.0369@sintetico.invalid,Ciudad de Mexico,CMX,2025-02-22
+370,Jorge,Sintetico0370,cliente.sintetico.0370@sintetico.invalid,Zapopan,JAL,2024-05-10
+371,Lucia,Sintetico0371,cliente.sintetico.0371@sintetico.invalid,Veracruz,VER,2024-04-11
+372,Pedro,Sintetico0372,cliente.sintetico.0372@sintetico.invalid,Xalapa,VER,2024-04-01
+373,Fernanda,Sintetico0373,cliente.sintetico.0373@sintetico.invalid,Guadalajara,JAL,2024-09-21
+374,Andres,Sintetico0374,cliente.sintetico.0374@sintetico.invalid,Ciudad de Mexico,CMX,2025-11-27
+375,Paula,Sintetico0375,cliente.sintetico.0375@sintetico.invalid,Naucalpan,MEX,2024-10-31
+376,Ricardo,Sintetico0376,cliente.sintetico.0376@sintetico.invalid,Toluca,MEX,2025-06-28
+377,Elena,Sintetico0377,cliente.sintetico.0377@sintetico.invalid,Leon,GUA,2024-06-26
+378,Hugo,Sintetico0378,cliente.sintetico.0378@sintetico.invalid,Mexicali,BCN,2024-10-10
+379,Renata,Sintetico0379,cliente.sintetico.0379@sintetico.invalid,Puebla,PUE,2024-11-18
+380,Oscar,Sintetico0380,cliente.sintetico.0380@sintetico.invalid,Xalapa,VER,2025-03-13
+381,Daniela,Sintetico0381,cliente.sintetico.0381@sintetico.invalid,Naucalpan,MEX,2025-11-11
+382,Emilio,Sintetico0382,cliente.sintetico.0382@sintetico.invalid,Mexicali,BCN,2024-06-26
+383,Camila,Sintetico0383,cliente.sintetico.0383@sintetico.invalid,Veracruz,VER,2024-08-15
+384,Raul,Sintetico0384,cliente.sintetico.0384@sintetico.invalid,Zapopan,JAL,2024-06-19
+385,Regina,Sintetico0385,cliente.sintetico.0385@sintetico.invalid,Tijuana,BCN,2024-03-27
+386,Ivan,Sintetico0386,cliente.sintetico.0386@sintetico.invalid,Zapopan,JAL,2025-10-11
+387,Ximena,Sintetico0387,cliente.sintetico.0387@sintetico.invalid,Queretaro,QUE,2025-03-20
+388,Mateo,Sintetico0388,cliente.sintetico.0388@sintetico.invalid,San Pedro Garza Garcia,NLE,2024-09-20
+389,Natalia,Sintetico0389,cliente.sintetico.0389@sintetico.invalid,Ciudad de Mexico,CMX,2025-10-28
+390,Adrian,Sintetico0390,cliente.sintetico.0390@sintetico.invalid,Queretaro,QUE,2025-12-03
+391,Ana,Sintetico0391,cliente.sintetico.0391@sintetico.invalid,Guadalajara,JAL,2024-06-13
+392,Luis,Sintetico0392,cliente.sintetico.0392@sintetico.invalid,Queretaro,QUE,2025-01-03
+393,Carmen,Sintetico0393,cliente.sintetico.0393@sintetico.invalid,Queretaro,QUE,2025-11-05
+394,Jose,Sintetico0394,cliente.sintetico.0394@sintetico.invalid,Ciudad de Mexico,CMX,2025-10-01
+395,Maria,Sintetico0395,cliente.sintetico.0395@sintetico.invalid,Ciudad de Mexico,CMX,2025-02-19
+396,Diego,Sintetico0396,cliente.sintetico.0396@sintetico.invalid,Merida,YUC,2025-05-13
+397,Sofia,Sintetico0397,cliente.sintetico.0397@sintetico.invalid,Leon,GUA,2025-03-15
+398,Miguel,Sintetico0398,cliente.sintetico.0398@sintetico.invalid,Ciudad de Mexico,CMX,2025-08-01
+399,Valeria,Sintetico0399,cliente.sintetico.0399@sintetico.invalid,Leon,GUA,2025-02-13
+400,Jorge,Sintetico0400,cliente.sintetico.0400@sintetico.invalid,Ciudad de Mexico,CMX,2025-05-05

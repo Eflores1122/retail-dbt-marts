@@ -1,0 +1,8 @@
+mercadoalba:
+  target: duckdb
+  outputs:
+    duckdb:
+      type: duckdb
+      path: target/mercadoalba.duckdb
+      schema: main
+      threads: 1

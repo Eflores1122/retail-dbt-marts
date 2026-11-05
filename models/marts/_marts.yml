@@ -1,0 +1,665 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: >
+      Civil dates from 2026-01-01 through 2026-03-31.
+      Weekend is Saturday and Sunday. Mexican public rest days in the window
+      are 1 January, the first Monday of February, and the third Monday of March.
+    columns:
+      - name: date_day
+        data_tests: [unique, not_null]
+      - name: year_number
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [2026]
+                quote: false
+      - name: quarter_number
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1]
+                quote: false
+      - name: month_number
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+      - name: month_name
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["January", "February", "March"]
+      - name: day_of_week
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 7
+                inclusive: true
+      - name: is_weekend
+        data_tests: [not_null]
+      - name: is_mx_public_holiday
+        data_tests: [not_null]
+      - name: holiday_name
+        description: Null when the date is not one of the three seeded rest days.
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(is_weekend and day_of_week >= 6) or (not is_weekend and day_of_week < 6)"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(is_mx_public_holiday and holiday_name is not null) or (not is_mx_public_holiday and holiday_name is null)"
+
+  - name: dim_customer
+    description: >
+      SCD Type 1 shopper dimension. customer_segment counts completed orders in the window,
+      including return-only orders and excluding cancelled orders.
+      none = 0, one_time = 1, returning = 2 to 4, frequent = 5 or more.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: given_name
+        data_tests: [not_null]
+      - name: family_name
+        data_tests: [not_null]
+      - name: full_name
+        data_tests: [not_null]
+      - name: email
+        data_tests: [unique, not_null]
+      - name: city
+        data_tests: [not_null]
+      - name: state_code
+        data_tests: [not_null]
+      - name: registered_on
+        data_tests: [not_null]
+      - name: completed_order_count
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: completed_sale_orders
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: gmv_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: net_sales_centavos
+        data_tests: [not_null]
+      - name: first_order_date
+        description: Null when the shopper has no completed order in the window.
+      - name: last_order_date
+        description: Null when the shopper has no completed order in the window.
+      - name: customer_segment
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["none", "one_time", "returning", "frequent"]
+
+  - name: dim_product
+    description: >
+      SCD Type 1 catalog. price_band is value under 50 MXN, mid from 50 to 150 MXN,
+      and premium above 150 MXN. There are no discounts in this extract.
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+      - name: sku
+        data_tests: [unique, not_null]
+      - name: product_name
+        data_tests: [not_null]
+      - name: category
+        data_tests: [not_null]
+      - name: subcategory
+        data_tests: [not_null]
+      - name: unit_label
+        data_tests: [not_null]
+      - name: unit_price_centavos
+        data_tests: [not_null]
+      - name: unit_cost_centavos
+        data_tests: [not_null]
+      - name: unit_price_mxn
+        data_tests: [not_null]
+      - name: unit_cost_mxn
+        data_tests: [not_null]
+      - name: catalog_margin_rate
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+                inclusive: true
+      - name: price_band
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["value", "mid", "premium"]
+      - name: is_perishable
+        data_tests: [not_null]
+
+  - name: dim_store
+    description: >
+      SCD Type 1 location. region is centro, occidente, norte, bajio, or sureste
+      from the state code. Channel stays a separate attribute.
+    columns:
+      - name: store_id
+        data_tests: [unique, not_null]
+      - name: store_name
+        data_tests: [unique, not_null]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["online", "physical"]
+      - name: city
+        data_tests: [not_null]
+      - name: state_code
+        data_tests: [not_null]
+      - name: region
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["centro", "occidente", "norte", "bajio", "sureste"]
+      - name: opened_on
+        data_tests: [not_null]
+
+  - name: fct_order_lines
+    description: >
+      Order-line fact. Grain is order_line_id.
+      GMV is the sum of line_amount_centavos where status is completed and line_type is sale.
+      Cancelled lines remain in the fact and are left out of GMV and net sales.
+    columns:
+      - name: order_line_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: order_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: ordered_at_utc
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["completed", "cancelled"]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["online", "physical"]
+      - name: line_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["sale", "return"]
+      - name: signed_quantity
+        data_tests: [not_null]
+      - name: unit_price_centavos
+        data_tests: [not_null]
+      - name: unit_cost_centavos
+        data_tests: [not_null]
+      - name: line_amount_centavos
+        data_tests: [not_null]
+      - name: line_cost_centavos
+        data_tests: [not_null]
+      - name: margin_centavos
+        data_tests: [not_null]
+      - name: line_amount_mxn
+        data_tests: [not_null]
+      - name: line_cost_mxn
+        data_tests: [not_null]
+      - name: margin_mxn
+        data_tests: [not_null]
+      - name: category
+        data_tests: [not_null]
+
+  - name: fct_orders
+    description: >
+      Order fact. Grain is order_id.
+      is_completed_sale is true when the order is completed and has a positive gross sale amount.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: order_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: ordered_at_utc
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["completed", "cancelled"]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["online", "physical"]
+      - name: is_completed
+        data_tests: [not_null]
+      - name: is_completed_sale
+        data_tests: [not_null]
+      - name: line_count
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: gross_sales_centavos
+        data_tests: [not_null]
+      - name: return_amount_centavos
+        data_tests: [not_null]
+      - name: net_sales_centavos
+        data_tests: [not_null]
+      - name: units_sold
+        data_tests: [not_null]
+      - name: units_net
+        data_tests: [not_null]
+      - name: margin_centavos
+        data_tests: [not_null]
+      - name: gross_sales_mxn
+        data_tests: [not_null]
+      - name: return_amount_mxn
+        data_tests: [not_null]
+      - name: net_sales_mxn
+        data_tests: [not_null]
+      - name: margin_mxn
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "is_completed = (status = 'completed')"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "is_completed_sale = (status = 'completed' and gross_sales_centavos > 0)"
+
+  - name: fct_inventory_daily
+    description: >
+      Daily inventory position. Grain is inventory_date, store_id, product_id.
+      The snapshot is synthetic and is not rebuilt from orders.
+    columns:
+      - name: inventory_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: on_hand_units
+        data_tests: [not_null]
+      - name: reserved_units
+        data_tests: [not_null]
+      - name: available_units
+        data_tests: [not_null]
+      - name: is_stockout
+        data_tests: [not_null]
+      - name: on_hand_cost_centavos
+        data_tests: [not_null]
+      - name: on_hand_cost_mxn
+        data_tests: [not_null]
+      - name: category
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - inventory_date
+              - store_id
+              - product_id
+
+  - name: mart_daily_sales
+    description: >
+      One row per civil date in the window. Orders and amounts are zero when a date has no lines.
+      This extract has at least one order on every date.
+    columns:
+      - name: order_date
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: orders
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: completed_orders
+        data_tests: [not_null]
+      - name: completed_sale_orders
+        data_tests: [not_null]
+      - name: cancelled_orders
+        data_tests: [not_null]
+      - name: gmv_centavos
+        data_tests: [not_null]
+      - name: net_sales_centavos
+        data_tests: [not_null]
+      - name: units_sold
+        data_tests: [not_null]
+      - name: gmv_mxn
+        data_tests: [not_null]
+      - name: net_sales_mxn
+        data_tests: [not_null]
+
+  - name: mart_store_scorecard
+    description: >
+      Store grain scorecard for the whole window.
+      In-stock rate uses the latest inventory date only.
+      GMV, net sales, and return rate use completed orders. Cancel rate uses every order.
+    columns:
+      - name: store_id
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: store_name
+        data_tests: [not_null]
+      - name: channel
+        data_tests: [not_null]
+      - name: city
+        data_tests: [not_null]
+      - name: state_code
+        data_tests: [not_null]
+      - name: region
+        data_tests: [not_null]
+      - name: orders
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: completed_orders
+        data_tests: [not_null]
+      - name: completed_sale_orders
+        data_tests: [not_null]
+      - name: cancelled_orders
+        data_tests: [not_null]
+      - name: gmv_centavos
+        data_tests: [not_null]
+      - name: return_amount_centavos
+        data_tests: [not_null]
+      - name: net_sales_centavos
+        data_tests: [not_null]
+      - name: units_sold
+        data_tests: [not_null]
+      - name: margin_centavos
+        data_tests: [not_null]
+      - name: gmv_mxn
+        data_tests: [not_null]
+      - name: net_sales_mxn
+        data_tests: [not_null]
+      - name: aov_mxn
+        data_tests: [not_null]
+      - name: cancel_rate
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+                inclusive: true
+      - name: return_rate
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+                inclusive: true
+      - name: inventory_positions
+        data_tests: [not_null]
+      - name: in_stock_positions
+        data_tests: [not_null]
+      - name: in_stock_rate
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+                inclusive: true
+      - name: on_hand_cost_centavos
+        data_tests: [not_null]
+      - name: on_hand_cost_mxn
+        data_tests: [not_null]
+
+  - name: mart_product_performance
+    description: >
+      Product grain for the whole window.
+      stockout_positions counts store-days where available units were zero, across every date.
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: sku
+        data_tests: [not_null]
+      - name: product_name
+        data_tests: [not_null]
+      - name: category
+        data_tests: [not_null]
+      - name: subcategory
+        data_tests: [not_null]
+      - name: price_band
+        data_tests: [not_null]
+      - name: is_perishable
+        data_tests: [not_null]
+      - name: units_sold
+        data_tests: [not_null]
+      - name: units_returned
+        data_tests: [not_null]
+      - name: gmv_centavos
+        data_tests: [not_null]
+      - name: net_sales_centavos
+        data_tests: [not_null]
+      - name: margin_centavos
+        data_tests: [not_null]
+      - name: orders_with_sale
+        data_tests: [not_null]
+      - name: gmv_mxn
+        data_tests: [not_null]
+      - name: net_sales_mxn
+        data_tests: [not_null]
+      - name: margin_mxn
+        data_tests: [not_null]
+      - name: margin_rate
+        description: Null when the product has no completed sale amount.
+      - name: inventory_positions
+        data_tests: [not_null]
+      - name: stockout_positions
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+
+  - name: mart_business_kpis
+    description: >
+      One row for the seeded window. GMV is completed sale amount and does not subtract returns.
+      Net sales subtracts returns. AOV is GMV divided by completed orders that contain a sale.
+      Return rate is the absolute completed return amount divided by GMV.
+      Cancel rate is cancelled orders divided by all orders.
+      Online GMV share is completed online sale amount divided by GMV.
+      In-stock rate is positions with available units above zero on the latest inventory date.
+      Active customers have at least one completed sale line.
+    columns:
+      - name: as_of_date
+        data_tests: [unique, not_null]
+      - name: window_start
+        data_tests: [not_null]
+      - name: window_end
+        data_tests: [not_null]
+      - name: customers
+        data_tests: [not_null]
+      - name: customers_none
+        data_tests: [not_null]
+      - name: customers_one_time
+        data_tests: [not_null]
+      - name: customers_returning
+        data_tests: [not_null]
+      - name: customers_frequent
+        data_tests: [not_null]
+      - name: active_customers
+        data_tests: [not_null]
+      - name: orders
+        data_tests: [not_null]
+      - name: completed_orders
+        data_tests: [not_null]
+      - name: completed_sale_orders
+        data_tests: [not_null]
+      - name: cancelled_orders
+        data_tests: [not_null]
+      - name: order_lines
+        data_tests: [not_null]
+      - name: gmv_centavos
+        data_tests: [not_null]
+      - name: return_amount_centavos
+        data_tests: [not_null]
+      - name: net_sales_centavos
+        data_tests: [not_null]
+      - name: margin_centavos
+        data_tests: [not_null]
+      - name: units_sold
+        data_tests: [not_null]
+      - name: online_gmv_centavos
+        data_tests: [not_null]
+      - name: gmv_mxn
+        data_tests: [not_null]
+      - name: net_sales_mxn
+        data_tests: [not_null]
+      - name: margin_mxn
+        data_tests: [not_null]
+      - name: aov_mxn
+        data_tests: [not_null]
+      - name: return_rate
+        data_tests: [not_null]
+      - name: cancel_rate
+        data_tests: [not_null]
+      - name: online_gmv_share
+        data_tests: [not_null]
+      - name: inventory_as_of
+        data_tests: [not_null]
+      - name: inventory_positions
+        data_tests: [not_null]
+      - name: in_stock_positions
+        data_tests: [not_null]
+      - name: in_stock_rate
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "customers = customers_none + customers_one_time + customers_returning + customers_frequent"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "orders = completed_orders + cancelled_orders"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "net_sales_centavos = gmv_centavos + return_amount_centavos"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "in_stock_positions <= inventory_positions"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "online_gmv_centavos <= gmv_centavos"

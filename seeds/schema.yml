@@ -1,0 +1,351 @@
+version: 2
+
+seeds:
+  - name: customers
+    description: Registered shoppers. Family names are Sintetico#### and mail uses the .invalid domain.
+    config:
+      column_types:
+        customer_id: integer
+        given_name: varchar
+        family_name: varchar
+        email: varchar
+        city: varchar
+        state_code: varchar
+        registered_on: date
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+      - name: given_name
+        data_tests:
+          - not_null
+      - name: family_name
+        data_tests:
+          - not_null
+      - name: email
+        data_tests:
+          - unique
+          - not_null
+      - name: city
+        data_tests:
+          - not_null
+      - name: state_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["CMX", "MEX", "JAL", "NLE", "PUE", "YUC", "BCN", "GUA", "QUE", "VER"]
+      - name: registered_on
+        data_tests:
+          - not_null
+
+  - name: products
+    description: Catalog. Prices and costs are integer centavos. Names contain "sintetico".
+    config:
+      column_types:
+        product_id: integer
+        sku: varchar
+        product_name: varchar
+        category: varchar
+        subcategory: varchar
+        unit_label: varchar
+        unit_price_centavos: integer
+        unit_cost_centavos: integer
+        is_perishable: boolean
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+      - name: sku
+        data_tests:
+          - unique
+          - not_null
+      - name: product_name
+        data_tests:
+          - not_null
+      - name: category
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - abarrotes
+                  - lacteos
+                  - frutas_verduras
+                  - carnes
+                  - bebidas
+                  - limpieza
+                  - cuidado_personal
+                  - panaderia
+      - name: subcategory
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - arroz
+                  - frijol
+                  - aceite
+                  - leche
+                  - yogurt
+                  - queso
+                  - fruta
+                  - verdura
+                  - hierba
+                  - pollo
+                  - res
+                  - cerdo
+                  - agua
+                  - jugo
+                  - refresco
+                  - detergente
+                  - jabon
+                  - cloro
+                  - shampoo
+                  - crema
+                  - pan
+                  - bolillo
+                  - tortilla
+      - name: unit_label
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["pieza", "kg", "litro"]
+      - name: unit_price_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: unit_cost_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: is_perishable
+        data_tests:
+          - not_null
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "unit_cost_centavos <= unit_price_centavos"
+
+  - name: stores
+    description: One online store and seven physical stores. Opened before the 2026 window.
+    config:
+      column_types:
+        store_id: integer
+        store_name: varchar
+        channel: varchar
+        city: varchar
+        state_code: varchar
+        opened_on: date
+    columns:
+      - name: store_id
+        data_tests:
+          - unique
+          - not_null
+      - name: store_name
+        data_tests:
+          - unique
+          - not_null
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["online", "physical"]
+      - name: city
+        data_tests:
+          - not_null
+      - name: state_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["CMX", "JAL", "NLE", "PUE", "YUC", "BCN", "GUA", "QUE"]
+      - name: opened_on
+        data_tests:
+          - not_null
+
+  - name: mx_holidays
+    description: >
+      Recurring Mexican public rest days inside the extract window.
+      One-off civic dates are omitted.
+    config:
+      column_types:
+        holiday_date: date
+        holiday_name: varchar
+    columns:
+      - name: holiday_date
+        data_tests:
+          - unique
+          - not_null
+      - name: holiday_name
+        data_tests:
+          - unique
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "Año Nuevo"
+                  - "Día de la Constitución"
+                  - "Natalicio de Benito Juárez"
+
+  - name: orders
+    description: >
+      Order headers. ordered_at is a naive UTC timestamp.
+      The civil date is America/Mexico_City, UTC−6, applied in staging.
+    config:
+      column_types:
+        order_id: integer
+        customer_id: integer
+        store_id: integer
+        ordered_at: timestamp
+        status: varchar
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('customers')
+                field: customer_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stores')
+                field: store_id
+      - name: ordered_at
+        data_tests:
+          - not_null
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["completed", "cancelled"]
+
+  - name: order_lines
+    description: >
+      One product per order. quantity is a positive magnitude.
+      line_type says whether intermediate should sign it as a sale or a return.
+    config:
+      column_types:
+        order_line_id: integer
+        order_id: integer
+        product_id: integer
+        line_type: varchar
+        quantity: integer
+        unit_price_centavos: integer
+    columns:
+      - name: order_line_id
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('orders')
+                field: order_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('products')
+                field: product_id
+      - name: line_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["sale", "return"]
+      - name: quantity
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: unit_price_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - order_id
+              - product_id
+
+  - name: inventory_snapshots
+    description: >
+      Full store-product snapshot for every civil date in the window.
+      Not a stock ledger derived from orders. reserved_units never exceeds on_hand_units.
+    config:
+      column_types:
+        inventory_date: date
+        store_id: integer
+        product_id: integer
+        on_hand_units: integer
+        reserved_units: integer
+    columns:
+      - name: inventory_date
+        data_tests:
+          - not_null
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stores')
+                field: store_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('products')
+                field: product_id
+      - name: on_hand_units
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: reserved_units
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - inventory_date
+              - store_id
+              - product_id
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "reserved_units <= on_hand_units"

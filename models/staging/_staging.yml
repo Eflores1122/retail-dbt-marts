@@ -1,0 +1,243 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Customers with trimmed names, a full name, and a lowercased email.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: given_name
+        data_tests: [not_null]
+      - name: family_name
+        data_tests: [not_null]
+      - name: full_name
+        data_tests: [not_null]
+      - name: email
+        data_tests: [unique, not_null]
+      - name: city
+        data_tests: [not_null]
+      - name: state_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["CMX", "MEX", "JAL", "NLE", "PUE", "YUC", "BCN", "GUA", "QUE", "VER"]
+      - name: registered_on
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "full_name = (given_name || ' ' || family_name)"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "email = lower(email)"
+
+  - name: stg_products
+    description: Catalog with integer centavos and a boolean perishable flag.
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+      - name: sku
+        data_tests: [unique, not_null]
+      - name: product_name
+        data_tests: [not_null]
+      - name: category
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - abarrotes
+                  - lacteos
+                  - frutas_verduras
+                  - carnes
+                  - bebidas
+                  - limpieza
+                  - cuidado_personal
+                  - panaderia
+      - name: subcategory
+        data_tests: [not_null]
+      - name: unit_label
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["pieza", "kg", "litro"]
+      - name: unit_price_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: unit_cost_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: is_perishable
+        data_tests: [not_null]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "unit_cost_centavos <= unit_price_centavos"
+
+  - name: stg_stores
+    description: Selling locations. Channel is online or physical.
+    columns:
+      - name: store_id
+        data_tests: [unique, not_null]
+      - name: store_name
+        data_tests: [unique, not_null]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["online", "physical"]
+      - name: city
+        data_tests: [not_null]
+      - name: state_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["CMX", "JAL", "NLE", "PUE", "YUC", "BCN", "GUA", "QUE"]
+      - name: opened_on
+        data_tests: [not_null]
+
+  - name: stg_mx_holidays
+    description: Holiday dates used by dim_date. The generator uses the same dates to cut order volume.
+    columns:
+      - name: holiday_date
+        data_tests: [unique, not_null]
+      - name: holiday_name
+        data_tests: [unique, not_null]
+
+  - name: stg_orders
+    description: >
+      Order headers. order_date is the America/Mexico_City civil date
+      of ordered_at_utc, using a fixed UTC−6 offset.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_stores')
+                field: store_id
+      - name: ordered_at_utc
+        data_tests: [not_null]
+      - name: order_date
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["completed", "cancelled"]
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "order_date = cast(ordered_at_utc - interval '6 hours' as date)"
+
+  - name: stg_order_lines
+    description: Line grain before sale and return quantities are signed.
+    columns:
+      - name: order_line_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+      - name: line_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["sale", "return"]
+      - name: quantity
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+      - name: unit_price_centavos
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                inclusive: true
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - order_id
+              - product_id
+
+  - name: stg_inventory
+    description: Daily on-hand and reserved units at store and product grain.
+    columns:
+      - name: inventory_date
+        data_tests: [not_null]
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_stores')
+                field: store_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+      - name: on_hand_units
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: reserved_units
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: true
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - inventory_date
+              - store_id
+              - product_id
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "reserved_units <= on_hand_units"

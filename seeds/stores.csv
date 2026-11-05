@@ -1,0 +1,9 @@
+store_id,store_name,channel,city,state_code,opened_on
+1,Mercado Alba Digital,online,Ciudad de Mexico,CMX,2023-03-01
+2,Tienda Sintetica Guadalajara,physical,Guadalajara,JAL,2022-06-15
+3,Tienda Sintetica Monterrey,physical,Monterrey,NLE,2022-08-01
+4,Tienda Sintetica Puebla,physical,Puebla,PUE,2023-01-20
+5,Tienda Sintetica Merida,physical,Merida,YUC,2023-05-04
+6,Tienda Sintetica Tijuana,physical,Tijuana,BCN,2023-09-11
+7,Tienda Sintetica Leon,physical,Leon,GUA,2024-02-01
+8,Tienda Sintetica Queretaro,physical,Queretaro,QUE,2024-07-18
