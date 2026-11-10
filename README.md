@@ -1,3 +1,5 @@
+Sitio: https://eflores1122.github.io/retail-dbt-marts/
+
 # Mercado Alba marts
 
 Reference dbt project for **Mercado Alba**, a fictitious Mexican omnichannel retailer. Seeds land synthetic customers, products, stores, orders, order lines, and daily inventory. Models publish:
@@ -24,6 +26,14 @@ No warehouse account and no credentials are required.
 `macros/generate_schema_name.sql` writes the custom schema name as-is. It does not prefix `main_`. The DuckDB profile sets `threads: 1` because the file has a single writer.
 
 Staging SQL, intermediate logic, and mart SQL are shared. The fact config is where the engines diverge. On DuckDB the facts get secondary indexes. On BigQuery they get `partition_by` and `cluster_by`. Those indexes are an access-path stand-in, not the same storage layout as BigQuery clustering. CI never selects the BigQuery target.
+
+## What runs in the browser
+
+https://eflores1122.github.io/retail-dbt-marts/ loads these CSV seeds into DuckDB-WASM and executes the SQL from `dbt compile` on the DuckDB target. That is 7 seeds, 22 models, and 493 data tests. A test passes when its compiled query returns zero rows, which is the dbt rule. The page draws lineage from `manifest.json` and runs SQL you edit against `raw`, `staging`, `intermediate`, and `marts`.
+
+The browser does not invoke the dbt CLI. It does not create the DuckDB indexes or the BigQuery partition and cluster clauses. Those configs do not change the compiled SELECT. Figures on the page are results of that browser run.
+
+`make site` writes `site/dist/` after `dbt compile` or `dbt build`. GitHub Actions (`.github/workflows/pages.yml`) compiles the project and deploys that directory on push to `main`.
 
 ## Architecture
 
@@ -192,7 +202,8 @@ The Makefile exports `DBT_PROFILES_DIR` to the repository root and uses `.venv/b
 | `make kpis` | Print `mart_business_kpis` |
 | `make lint` | Ruff check and format check on `scripts/` |
 | `make generate` | Rewrite the CSV seeds |
-| `make clean` | `dbt clean` and remove `target/` and `logs/` |
+| `make clean` | `dbt clean` and remove `target/`, `logs/`, and `site/dist/` |
+| `make site` | Build `site/dist/` from `target/manifest.json` |
 
 GitHub Actions (`.github/workflows/ci.yml`) runs on push to `main` and on pull request. The job has `contents: read`, uses Python 3.12, installs `requirements-dev.txt`, runs Ruff, and runs `make test`. It uses no secrets.
 
@@ -235,4 +246,4 @@ MIT. See [LICENSE](LICENSE).
 
 ## Resumen en español
 
-Mercado Alba es un minorista omnicanal ficticio. Este proyecto dbt transforma CSV sintéticos en modelos staging, intermediate y marts sobre DuckDB. La ventana va del 2026-01-01 al 2026-03-31 y las ventas brutas de esa corrida son 1,244,657.00 MXN. No hace falta una cuenta de nube. Ninguna fila es de una empresa real.
+Mercado Alba es un minorista omnicanal ficticio. Este proyecto dbt transforma CSV sintéticos en modelos staging, intermediate y marts sobre DuckDB. La ventana va del 2026-01-01 al 2026-03-31 y las ventas brutas de esa corrida son 1,244,657.00 MXN. No hace falta una cuenta de nube. Ninguna fila es de una empresa real. El sitio público corre ese SQL compilado en el navegador.

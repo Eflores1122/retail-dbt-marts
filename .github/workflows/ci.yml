@@ -29,3 +29,5 @@ jobs:
           ruff format --check scripts
       - name: dbt build
         run: make test
+      - name: Build browser site
+        run: python scripts/build_site.py
