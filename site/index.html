@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mercado Alba marts</title>
+    <meta
+      name="description"
+      content="Marts dbt de Mercado Alba, un retailer omnicanal ficticio. El navegador corre los seeds en DuckDB-WASM, muestra el linaje y ejecuta las pruebas."
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230f6e56'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#resultado">Saltar al resultado</a>
+    <header class="site-header">
+      <div class="wrap header-bar">
+        <a class="wordmark" href="#resultado">Mercado Alba</a>
+        <nav aria-label="Secciones">
+          <a href="#resultado" data-i18n="navResult">Resultado</a>
+          <a href="#tiendas" data-i18n="navStores">Tiendas</a>
+          <a href="#dias" data-i18n="navDays">Días</a>
+          <a href="#productos" data-i18n="navProducts">Productos</a>
+          <a href="#linaje" data-i18n="navLineage">Linaje</a>
+          <a href="#sql" data-i18n="navSql">SQL</a>
+          <a href="#pruebas" data-i18n="navTests">Pruebas</a>
+          <a href="#definiciones" data-i18n="navDefs">Definiciones</a>
+        </nav>
+        <div class="lang" role="group" aria-label="Idioma">
+          <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </header>
+    <main class="wrap">
+      <noscript>
+        <p>Esta página necesita JavaScript para correr DuckDB en el navegador.</p>
+      </noscript>
+      <section id="resultado" class="sheet" aria-busy="true">
+        <div>
+          <h1 data-i18n="title">Marts de Mercado Alba</h1>
+          <p id="lede"></p>
+          <p id="window-note" class="note"></p>
+          <button type="button" class="primary" id="run" disabled>Correr los marts con los seeds</button>
+          <p id="status" role="status">Cargando el catálogo compilado.</p>
+          <ol id="layers" class="layers"></ol>
+          <p id="run-log"></p>
+        </div>
+        <div>
+          <h2 data-i18n="kpiTitle">Hoja del periodo</h2>
+          <div class="scroll">
+            <table id="kpi-table">
+              <caption id="kpi-caption"></caption>
+              <thead>
+                <tr>
+                  <th data-i18n="metric">Métrica</th>
+                  <th class="num" data-i18n="value">Valor</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="tiendas">
+        <h2 data-i18n="storesTitle">Tiendas</h2>
+        <p id="stores-note" class="note"></p>
+        <div class="scroll" id="store-table"></div>
+      </section>
+
+      <section id="dias">
+        <h2 data-i18n="dailyTitle">Venta por día civil</h2>
+        <figure id="daily-chart"></figure>
+        <details>
+          <summary data-i18n="dailyTableToggle">Tabla de mart_daily_sales</summary>
+          <div class="scroll" id="daily-table"></div>
+        </details>
+      </section>
+
+      <section id="productos">
+        <h2 data-i18n="productsTitle">Productos</h2>
+        <p class="note" data-i18n="productsIntro"></p>
+        <label class="filter">
+          <span data-i18n="category">Categoría</span>
+          <select id="category"></select>
+        </label>
+        <div class="scroll" id="product-table"></div>
+      </section>
+
+      <section id="linaje">
+        <h2 data-i18n="lineageTitle">Linaje</h2>
+        <p class="note" data-i18n="lineageIntro"></p>
+        <div id="lineage-scroll" class="lineage-scroll">
+          <div id="lineage-board" class="lineage-board"></div>
+        </div>
+        <div id="node-detail"></div>
+      </section>
+
+      <section id="arquitectura">
+        <h2 data-i18n="archTitle">Arquitectura</h2>
+        <p class="note" data-i18n="archIntro"></p>
+        <div id="diagram-flow" class="diagram"></div>
+        <div id="diagram-er" class="diagram"></div>
+      </section>
+
+      <section id="sql">
+        <h2 data-i18n="sqlTitle">Consulta</h2>
+        <p class="note" data-i18n="sqlIntro"></p>
+        <div class="sql-bar">
+          <label>
+            <span data-i18n="preset">Consulta guardada</span>
+            <select id="preset"></select>
+          </label>
+          <label>
+            <span data-i18n="relation">Relación</span>
+            <select id="relation"></select>
+          </label>
+        </div>
+        <textarea id="sql-input" class="sql" spellcheck="false" aria-label="SQL"></textarea>
+        <button type="button" id="sql-run" disabled data-i18n="sqlRun">Ejecutar consulta</button>
+        <p id="sql-status" role="status"></p>
+        <div class="scroll" id="sql-result"></div>
+      </section>
+
+      <section id="pruebas">
+        <h2 data-i18n="testsTitle">Pruebas de dbt</h2>
+        <p class="note" data-i18n="testsIntro"></p>
+        <label class="filter">
+          <span data-i18n="testFilterLabel">Filtrar</span>
+          <input id="test-filter" type="search" />
+        </label>
+        <p id="test-summary" role="status"></p>
+        <div id="test-groups"></div>
+      </section>
+
+      <section id="definiciones">
+        <h2 data-i18n="defsTitle">Definiciones</h2>
+        <p class="note" data-i18n="defsIntro"></p>
+        <div class="scroll" id="defs"></div>
+      </section>
+
+      <section id="limites">
+        <h2 data-i18n="limitsTitle">Límites</h2>
+        <ul id="limits"></ul>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        <p id="footer-project"></p>
+        <p id="footer-type"></p>
+        <p class="footer-links">
+          <a href="https://github.com/Eflores1122">Edgar Flores</a>
+          <a href="https://github.com/Eflores1122/retail-dbt-marts">retail-dbt-marts</a>
+          <a href="fonts/OFL.txt">SIL Open Font License</a>
+        </p>
+        <p id="engine-note"></p>
+      </div>
+    </footer>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

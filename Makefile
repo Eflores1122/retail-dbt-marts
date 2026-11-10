@@ -4,7 +4,7 @@ DBT := $(if $(wildcard .venv/bin/dbt),.venv/bin/dbt,dbt)
 PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 RUFF := $(if $(wildcard .venv/bin/ruff),.venv/bin/ruff,ruff)
 
-.PHONY: install deps seed run test docs generate check-seeds lint clean kpis
+.PHONY: install deps seed run test docs generate check-seeds lint clean kpis site
 
 install:
 	python3 -m venv .venv
@@ -43,4 +43,7 @@ lint:
 
 clean:
 	$(DBT) clean
-	rm -rf target logs
+	rm -rf target logs site/dist
+
+site:
+	$(PY) scripts/build_site.py
