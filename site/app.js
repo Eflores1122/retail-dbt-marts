@@ -16,7 +16,7 @@ const COPY = {
     navSql: "SQL",
     navTests: "Pruebas",
     navDefs: "Definiciones",
-    lede: "Este navegador carga {seeds} CSV y ejecuta {models} modelos compilados por dbt {dbt}. Hay {tests} pruebas de datos. Las cifras de la hoja salen de esa corrida.",
+    lede: "Este navegador carga {seeds} CSV y ejecuta {models} modelos compilados por dbt {dbt}. Hay {tests} pruebas de datos. Las cifras de la hoja salen de esa corrida. Es un proyecto de portafolio para aprender dbt, con datos sintéticos. No es un almacén en producción.",
     ledeWaiting: "Cargando el catálogo que produjo dbt compile.",
     windowNote: "dbt_project.yml fija la ventana del {start} al {end}. La fila de abajo, cuando exista, sale de marts.mart_business_kpis.",
     run: "Correr los marts con los seeds",
@@ -130,7 +130,7 @@ const COPY = {
     defsTitle: "Definiciones",
     defsIntro: "Las mismas reglas que models/marts y el README. Los nombres de columna se dejan como están en el almacén.",
     limitsTitle: "Límites",
-    footerProject: "Mercado Alba es un minorista ficticio. Clientes, tiendas, productos, pedidos e inventario salen de scripts/generate_seeds.py con random.Random(42). Edgar Flores, Data/AI Engineer.",
+    footerProject: "Proyecto de portafolio para aprender dbt, no experiencia de dbt en producción. Mercado Alba es un minorista ficticio. Clientes, tiendas, productos, pedidos e inventario salen de scripts/generate_seeds.py con random.Random(42). Edgar Flores, Data/AI Engineer.",
     footerType: "El texto es IBM Plex Sans y el SQL es IBM Plex Mono, una familia de código abierto para lectura técnica. El verde #0F6E56 es el único acento: el verde de una etiqueta de caja de verdura, usado en la corrida y en las pruebas que pasan.",
     rows: "filas",
     depends: "Depende de",
@@ -171,7 +171,7 @@ const COPY = {
     navSql: "SQL",
     navTests: "Tests",
     navDefs: "Definitions",
-    lede: "This browser loads {seeds} CSVs and runs {models} models compiled by dbt {dbt}. There are {tests} data tests. The figures on the sheet come from that run.",
+    lede: "This browser loads {seeds} CSVs and runs {models} models compiled by dbt {dbt}. There are {tests} data tests. The figures on the sheet come from that run. This is a portfolio project for learning dbt, on synthetic data. It is not a production warehouse.",
     ledeWaiting: "Loading the catalog produced by dbt compile.",
     windowNote: "dbt_project.yml sets the window from {start} through {end}. The row below, once it exists, comes from marts.mart_business_kpis.",
     run: "Run the marts on the example seeds",
@@ -285,7 +285,7 @@ const COPY = {
     defsTitle: "Definitions",
     defsIntro: "The same rules as models/marts and the README. Column names stay as they are in the warehouse.",
     limitsTitle: "Limits",
-    footerProject: "Mercado Alba is a fictitious retailer. Customers, stores, products, orders, and inventory come from scripts/generate_seeds.py with random.Random(42). Edgar Flores, Data/AI Engineer.",
+    footerProject: "Portfolio project for learning dbt, not production dbt experience. Mercado Alba is a fictitious retailer. Customers, stores, products, orders, and inventory come from scripts/generate_seeds.py with random.Random(42). Edgar Flores, Data/AI Engineer.",
     footerType: "Text is IBM Plex Sans and SQL is IBM Plex Mono, an open-source family made for technical reading. Green #0F6E56 is the only accent: the green of a produce-crate label, used for the run and for tests that pass.",
     rows: "rows",
     depends: "Depends on",
@@ -352,6 +352,7 @@ const DEFS = {
 
 const LIMITS = {
   es: [
+    "Esta página es un demo de portafolio. Las cifras son los seeds sintéticos, no una tienda en operación.",
     "El navegador no llama al CLI de dbt. Corre el SELECT que dbt compile escribió para DuckDB.",
     "No crea los índices de los hechos ni la partición y el cluster de BigQuery. Esas opciones no cambian el SELECT.",
     "DuckDB-WASM se descarga de jsDelivr. Sin esa red la corrida no arranca.",
@@ -361,6 +362,7 @@ const LIMITS = {
     "La vista de una consulta muestra como máximo 200 filas.",
   ],
   en: [
+    "This page is a portfolio demo. The numbers are the synthetic seeds, not a live store.",
     "The browser does not call the dbt CLI. It runs the SELECT that dbt compile wrote for DuckDB.",
     "It does not create the fact indexes or the BigQuery partition and cluster. Those options do not change the SELECT.",
     "DuckDB-WASM is downloaded from jsDelivr. Without that network the run does not start.",

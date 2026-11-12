@@ -1,35 +1,37 @@
-Sitio: https://eflores1122.github.io/retail-dbt-marts/
+Browser site: https://eflores1122.github.io/retail-dbt-marts/
 
 # Mercado Alba marts
 
-Reference dbt project for **Mercado Alba**, a fictitious Mexican omnichannel retailer. Seeds land synthetic customers, products, stores, orders, order lines, and daily inventory. Models publish:
+Portfolio and learning project: dbt marts for **Mercado Alba**, a fictitious Mexican omnichannel retailer, built on synthetic data and run locally with dbt-duckdb.
+
+The exercise is a retail extract with no warehouse account. Generated customers, products, stores, orders, lines, and daily inventory become tested dimensions, facts, and scorecards. The project practices a staging, intermediate, and marts split, with tests on grain and on the metric definitions. It is not production dbt experience, and these models are not a warehouse running for an employer. Written by Edgar Flores Hernández as a learning repository.
+
+Seeds land the synthetic extract. Models publish:
 
 `dim_customer`, `dim_product`, `dim_store`, `dim_date`, `fct_order_lines`, `fct_orders`, `fct_inventory_daily`, `mart_daily_sales`, `mart_store_scorecard`, `mart_product_performance`, `mart_business_kpis`.
 
-This repository is a reference implementation built with synthetic data. It demonstrates the modeling split Edgar Flores uses: staging, intermediate, and marts, with tests on grain and on the metric definitions.
-
 Mercado Alba is not a real company. Every customer, product, store, order, and inventory row is generated. The figures below are this seeded DuckDB run.
 
-The same fictitious retailer is used in the [Airflow ELT reference project](https://github.com/Eflores1122/airflow-bigquery-retail-elt). The two repositories do not share files. That project lands parquet. This one starts from CSV seeds and keeps order headers, a daily inventory snapshot, and the store and product marts.
+The same fictitious retailer is used in the [Airflow ELT learning project](https://github.com/Eflores1122/airflow-bigquery-retail-elt). The two repositories do not share files. That project lands parquet. This one starts from CSV seeds and keeps order headers, a daily inventory snapshot, and the store and product marts.
 
 ## What runs locally
 
-No warehouse account and no credentials are required.
+No warehouse account and no credentials are required. Stack: Python 3.12, dbt Core, dbt-duckdb, DuckDB, dbt_utils, Ruff, and GitHub Actions. The browser page uses DuckDB-WASM.
 
-| Piece | Local / CI | Production-shaped target |
+| Piece | Local and CI | Optional BigQuery example |
 | --- | --- | --- |
-| Project | dbt Core and dbt-duckdb | The same models |
-| Warehouse | DuckDB file `target/mercadoalba.duckdb` | BigQuery, optional extra |
+| Project | dbt Core and dbt-duckdb | The same models, not run here |
+| Warehouse | DuckDB file `target/mercadoalba.duckdb` | BigQuery, not selected by CI |
 | Schemas | `raw`, `staging`, `intermediate`, `marts` | The same dataset names |
-| Fact layout | Indexes on the date, and on `store_id` plus `product_id` | `PARTITION BY` the date and `CLUSTER BY store_id, product_id` |
+| Fact layout | Date index on each fact. `store_id, product_id` on lines and inventory. `store_id` on orders. | Date partition. Cluster by `store_id, product_id` on lines and inventory, and by `store_id` on orders. |
 
 `macros/generate_schema_name.sql` writes the custom schema name as-is. It does not prefix `main_`. The DuckDB profile sets `threads: 1` because the file has a single writer.
 
-Staging SQL, intermediate logic, and mart SQL are shared. The fact config is where the engines diverge. On DuckDB the facts get secondary indexes. On BigQuery they get `partition_by` and `cluster_by`. Those indexes are an access-path stand-in, not the same storage layout as BigQuery clustering. CI never selects the BigQuery target.
+Staging SQL, intermediate logic, and mart SQL are shared. The fact config is where the engines diverge. On DuckDB the facts get secondary indexes. On BigQuery they get `partition_by` and `cluster_by`. Those indexes are an access-path stand-in, not the same storage layout as BigQuery clustering. The BigQuery block is an example of that config. CI never selects it, and this repository does not claim a production BigQuery job.
 
 ## What runs in the browser
 
-https://eflores1122.github.io/retail-dbt-marts/ loads these CSV seeds into DuckDB-WASM and executes the SQL from `dbt compile` on the DuckDB target. That is 7 seeds, 22 models, and 493 data tests. A test passes when its compiled query returns zero rows, which is the dbt rule. The page draws lineage from `manifest.json` and runs SQL you edit against `raw`, `staging`, `intermediate`, and `marts`.
+https://eflores1122.github.io/retail-dbt-marts/ loads these CSV seeds into DuckDB-WASM and executes the SQL from `dbt compile` on the DuckDB target. That is 7 seeds, 22 models, and 494 data tests. A test passes when its compiled query returns zero rows, which is the dbt rule. The page draws lineage from `manifest.json` and runs SQL you edit against `raw`, `staging`, `intermediate`, and `marts`.
 
 The browser does not invoke the dbt CLI. It does not create the DuckDB indexes or the BigQuery partition and cluster clauses. Those configs do not change the compiled SELECT. Figures on the page are results of that browser run.
 
@@ -95,7 +97,7 @@ There is no discount in this extract. The line unit price equals the catalog uni
 
 ## Seeded run
 
-Measured with Python 3.12.3, dbt Core 1.12.6, dbt-duckdb 1.11.1, and DuckDB 2.0.0. `dbt build` on these seeds completed 7 seeds, 22 models, and 493 data tests.
+Measured with Python 3.12.3, dbt Core 1.12.6, dbt-duckdb 1.11.1, and DuckDB 2.0.0. `dbt build` on these seeds completed 7 seeds, 22 models, and 494 data tests.
 
 The window is 2026-01-01 through 2026-03-31. Every civil date in the window has at least one order. `mart_business_kpis` is one row for that window. `scripts/check_readme.py` fails if this section drifts from that row.
 
@@ -205,17 +207,17 @@ The Makefile exports `DBT_PROFILES_DIR` to the repository root and uses `.venv/b
 | `make clean` | `dbt clean` and remove `target/`, `logs/`, and `site/dist/` |
 | `make site` | Build `site/dist/` from `target/manifest.json` |
 
-GitHub Actions (`.github/workflows/ci.yml`) runs on push to `main` and on pull request. The job has `contents: read`, uses Python 3.12, installs `requirements-dev.txt`, runs Ruff, and runs `make test`. It uses no secrets.
+GitHub Actions (`.github/workflows/ci.yml`) runs on push to `main` and on pull request. The job has `contents: read`, uses Python 3.12, installs `requirements-dev.txt`, runs `make lint`, and runs `make test`. `make test` checks the seeds, runs `dbt deps`, then `dbt build` (seed, run, and test), then checks that this README quotes the KPI mart. The job uses no secrets. The Pages workflow compiles the project for the browser site and does not select a BigQuery target.
 
 ## Tests
 
-Singular tests reconcile line amount to quantity times price, order totals to lines, GMV to completed sales, store and product marts to the KPI row, daily sales to the fact, inventory available units to on-hand minus reserved, catalog price to the line, holiday flags to `mx_holidays`, and customer segment to the completed-order count.
+Singular tests reconcile line amount to quantity times price, order totals to lines, GMV to completed sales, store and product marts to the KPI row, daily sales to the fact, inventory available units to on-hand minus reserved, catalog price to the line, holiday flags to `mx_holidays`, customer segment to the completed-order count, and published MXN amounts to centavos divided by 100.
 
-Schema tests cover unique keys, not-null columns, accepted values, foreign keys, ranges, and `dbt_utils` expressions. `dbt build` on this extract is the run quoted above: 7 seeds, 22 models, and 493 data tests.
+Schema tests cover unique keys, not-null columns, accepted values, foreign keys, ranges, and `dbt_utils` expressions. `dbt build` on this extract is the run quoted above: 7 seeds, 22 models, and 494 data tests.
 
-## Optional BigQuery
+## Optional BigQuery example
 
-CI does not install `dbt-bigquery` and does not read this profile.
+`profiles.bigquery.yml.example` shows how the same models would point at BigQuery. It is study material. CI does not install `dbt-bigquery`, does not read that file, and this repository does not describe a production BigQuery job.
 
 ```bash
 pip install "dbt-bigquery>=1.11,<2"
@@ -231,6 +233,7 @@ The profile dataset is the fallback schema. The schema macro still creates `raw`
 
 ## Limitations
 
+- This is a portfolio and learning project on synthetic seeds. It is not production dbt experience.
 - Catalog price and cost do not change across the window, and the extract has no discounts.
 - A return line is not tied to an original sale line. Returns are negative lines on their own order.
 - Cancelled orders contain sale lines only.
@@ -246,4 +249,4 @@ MIT. See [LICENSE](LICENSE).
 
 ## Resumen en español
 
-Mercado Alba es un minorista omnicanal ficticio. Este proyecto dbt transforma CSV sintéticos en modelos staging, intermediate y marts sobre DuckDB. La ventana va del 2026-01-01 al 2026-03-31 y las ventas brutas de esa corrida son 1,244,657.00 MXN. No hace falta una cuenta de nube. Ninguna fila es de una empresa real. El sitio público corre ese SQL compilado en el navegador.
+Este repositorio es un proyecto de portafolio para aprender dbt. No es experiencia de dbt en producción. Mercado Alba es un minorista omnicanal ficticio. El proyecto transforma CSV sintéticos en modelos staging, intermediate y marts sobre DuckDB. La ventana va del 2026-01-01 al 2026-03-31 y las ventas brutas de esa corrida son 1,244,657.00 MXN. No hace falta una cuenta de nube. Ninguna fila es de una empresa real. El sitio público corre ese SQL compilado en el navegador.
